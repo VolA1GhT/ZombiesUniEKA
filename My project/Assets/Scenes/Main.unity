@@ -467,13 +467,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 841068966}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalRotation: {x: -0.043619405, y: 0, z: 0, w: 0.9990483}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -10, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -5, y: 0, z: 0}
 --- !u!1 &884705609
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,11 +503,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dda13432f3f9b942bda30ef91f3e1d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  selectedZombie: {fileID: 0}
   zombies:
   - {fileID: 713925970}
   - {fileID: 1605968374}
   - {fileID: 1414830017}
   - {fileID: 1624338386}
+  selectedSize: {x: 1.3, y: 1.3, z: 1.3}
+  pushForce: {x: 0, y: 200, z: 150}
 --- !u!4 &884705611
 Transform:
   m_ObjectHideFlags: 0
@@ -609,8 +612,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 958588162}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.21188065, y: 0.22148375, z: -0.04936742, w: -0.95058644}
-  m_LocalPosition: {x: 8.62, y: 7.41, z: -12.06}
+  m_LocalRotation: {x: -0.25979406, y: -0.0023207366, z: 0.0006231284, w: -0.96566105}
+  m_LocalPosition: {x: -0.39769605, y: 7.438547, z: -14.892279}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
