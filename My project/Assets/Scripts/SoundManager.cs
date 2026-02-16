@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public AudioSource musicSource;
+    public AudioClip musicClip;
+    public AudioClip collectClip;
+
     void Start()
     {
         
