@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject selectedZombie;
     public GameObject[] zombies;
+    public GameObject gameOverPanel;
     public Vector3 selectedSize;
     public Vector3 pushForce;
     private int selectedIndex = 0;
@@ -13,8 +14,18 @@ public class GameManager : MonoBehaviour
     public TMP_Text timerText;
     public TMP_Text scoreText;
     private float timer;
+
+    public AudioSource musicSource;
+    public AudioSource sfxSource;
+    public AudioClip musicClip;
+    public AudioClip collectClip;
+    public AudioClip jumpClip;
+
+
     void Start()
     {
+        musicSource.clip = musicClip;
+        musicSource.Play();
         prev = InputSystem.actions.FindAction("NextZombie");
         next = InputSystem.actions.FindAction("PreviousZombie");
         jump = InputSystem.actions.FindAction("Jump");
@@ -44,7 +55,8 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("jump");
             Rigidbody rb = selectedZombie.GetComponent<Rigidbody>();
-            if(rb != null)
+            sfxSource.PlayOneShot(jumpClip);
+            if (rb != null)
                 rb.AddForce(pushForce);
         }
         timer += Time.deltaTime;
@@ -61,5 +73,13 @@ public class GameManager : MonoBehaviour
         selectedZombie.transform.localScale = selectedSize;
         Debug.Log("selected: " + selectedZombie);
 
+    }
+
+    void GameOver()
+    {
+        if(zombies[0] == null && zombies[1] == null && zombies[2] == null && zombies[3] == null)    
+        {
+            gameOverPanel.SetActive(true);
+        }
     }
 }
