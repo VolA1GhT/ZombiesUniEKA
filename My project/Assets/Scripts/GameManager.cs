@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class GameManager : MonoBehaviour
     public Vector3 pushForce;
     private int selectedIndex = 0;
     private InputAction next, prev, jump;
-    public int score = 0;
+    public static int score = 0;
     public GameObject collectablePrefab;
     public TMP_Text timerText;
     public TMP_Text scoreText;
@@ -64,6 +63,8 @@ public class GameManager : MonoBehaviour
         }
         timer += Time.deltaTime;
         timerText.text = "Time: " + timer.ToString("F1") +"s";
+
+        AddScore();
     }
 
     void SelectZombie(int index)
