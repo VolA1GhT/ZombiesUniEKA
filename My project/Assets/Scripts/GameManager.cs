@@ -1,6 +1,7 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class GameManager : MonoBehaviour
     public Vector3 pushForce;
     private int selectedIndex = 0;
     private InputAction next, prev, jump;
+    public int score = 0;
+    public GameObject collectablePrefab;
     public TMP_Text timerText;
     public TMP_Text scoreText;
     private float timer;
@@ -73,6 +76,13 @@ public class GameManager : MonoBehaviour
         selectedZombie.transform.localScale = selectedSize;
         Debug.Log("selected: " + selectedZombie);
 
+    }
+
+    public void AddScore()
+    {
+        score++;
+        sfxSource.PlayOneShot(collectClip);
+        scoreText.text = "Score: " + score;
     }
 
     void GameOver()
