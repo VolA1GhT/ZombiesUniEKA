@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("jump");
             Rigidbody rb = selectedZombie.GetComponent<Rigidbody>();
             sfxSource.PlayOneShot(jumpClip);
+            sfxSource.pitch = Random.Range(0.6f, 1.05f);
             if (rb != null)
                 rb.AddForce(pushForce);
         }
@@ -105,6 +106,8 @@ public class GameManager : MonoBehaviour
         sfxSource.PlayOneShot(GameOverClip);
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
+        scoreText.gameObject.SetActive(false);
+        timerText.gameObject.SetActive(false);
 
         next.Disable();
         prev.Disable();
