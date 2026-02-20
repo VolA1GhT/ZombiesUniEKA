@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class Collectable : MonoBehaviour
+public class Zombie : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Lava"))
         {
+            GameManager.instance.GameOver();
             Destroy(gameObject);
-            GameManager.instance.AddScore();
         }
     }
 }

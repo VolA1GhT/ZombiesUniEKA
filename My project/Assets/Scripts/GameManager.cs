@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
     public GameObject selectedZombie;
     public GameObject[] zombies;
     public GameObject gameOverPanel;
@@ -11,9 +12,13 @@ public class GameManager : MonoBehaviour
     public Vector3 pushForce;
     private int selectedIndex = 0;
     private InputAction next, prev, jump;
-    public static int score = 0;
+    public int score = 0;
     public GameObject collectablePrefab;
+
+
     public TMP_Text timerText;
+    public TMP_Text gameOverTimerText;
+    public TMP_Text gameOverScoreText;
     public TMP_Text scoreText;
     private float timer;
 
@@ -22,10 +27,15 @@ public class GameManager : MonoBehaviour
     public AudioClip musicClip;
     public AudioClip collectClip;
     public AudioClip jumpClip;
+    public AudioClip GameOverClip;  
 
-
+    private void Awake()
+    {
+        GameManager.instance = this;
+    }
     void Start()
     {
+        Time.timeScale = 1f;
         musicSource.clip = musicClip;
         musicSource.Play();
         prev = InputSystem.actions.FindAction("NextZombie");
@@ -33,6 +43,10 @@ public class GameManager : MonoBehaviour
         jump = InputSystem.actions.FindAction("Jump");
 
         SelectZombie(selectedIndex);
+
+        next.Enable();
+        prev.Enable();
+        jump.Enable();
     }
 
     private void Update()
@@ -63,8 +77,7 @@ public class GameManager : MonoBehaviour
         }
         timer += Time.deltaTime;
         timerText.text = "Time: " + timer.ToString("F1") +"s";
-
-        AddScore();
+        gameOverTimerText.text = "Time: " + timer.ToString("F1") + "s";
     }
 
     void SelectZombie(int index)
@@ -76,7 +89,6 @@ public class GameManager : MonoBehaviour
         selectedZombie = zombies[index];
         selectedZombie.transform.localScale = selectedSize;
         Debug.Log("selected: " + selectedZombie);
-
     }
 
     public void AddScore()
@@ -84,13 +96,18 @@ public class GameManager : MonoBehaviour
         score++;
         sfxSource.PlayOneShot(collectClip);
         scoreText.text = "Score: " + score;
+        gameOverScoreText.text = "Score: " + score;
     }
 
-    void GameOver()
+    public void GameOver()
     {
-        if(zombies[0] == null && zombies[1] == null && zombies[2] == null && zombies[3] == null)    
-        {
-            gameOverPanel.SetActive(true);
-        }
+        musicSource.Stop();
+        sfxSource.PlayOneShot(GameOverClip);
+        gameOverPanel.SetActive(true);
+        Time.timeScale = 0f;
+
+        next.Disable();
+        prev.Disable();
+        jump.Disable();
     }
 }
