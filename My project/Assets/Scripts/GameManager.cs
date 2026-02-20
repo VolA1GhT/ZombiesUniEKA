@@ -15,6 +15,12 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     public GameObject collectablePrefab;
 
+    public Transform collectableParent;
+    public float steakMinX = -2f;
+    public float steakMaxX = 2.5f;
+    public float steakMinZ = -7f;
+    public float steakMaxZ = 7f;
+
 
     public TMP_Text timerText;
     public TMP_Text gameOverTimerText;
@@ -47,6 +53,8 @@ public class GameManager : MonoBehaviour
         next.Enable();
         prev.Enable();
         jump.Enable();
+
+        GenerateSteak();
     }
 
     private void Update()
@@ -71,10 +79,11 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("jump");
             Rigidbody rb = selectedZombie.GetComponent<Rigidbody>();
-            sfxSource.PlayOneShot(jumpClip);
-            sfxSource.pitch = Random.Range(0.6f, 1.05f);
             if (rb != null)
                 rb.AddForce(pushForce);
+
+            sfxSource.PlayOneShot(jumpClip);
+            sfxSource.pitch = Random.Range(0.6f, 1.05f);
         }
         timer += Time.deltaTime;
         timerText.text = "Time: " + timer.ToString("F1") +"s";
@@ -92,12 +101,21 @@ public class GameManager : MonoBehaviour
         Debug.Log("selected: " + selectedZombie);
     }
 
+    public void GenerateSteak()
+    {
+        Vector3 spawnPos = new Vector3(Random.Range(steakMinX, steakMaxX),7f,Random.Range(steakMinZ, steakMaxZ));
+
+        Instantiate(collectablePrefab, spawnPos, Quaternion.identity, collectableParent);
+    }
     public void AddScore()
     {
         score++;
         sfxSource.PlayOneShot(collectClip);
         scoreText.text = "Score: " + score;
         gameOverScoreText.text = "Score: " + score;
+
+
+        GenerateSteak();
     }
 
     public void GameOver()

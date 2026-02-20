@@ -9,5 +9,10 @@ public class Collectable : MonoBehaviour
             Destroy(gameObject);
             GameManager.instance.AddScore();
         }
+        if(other.CompareTag("Lava"))
+        {
+            Destroy(gameObject);
+            GameManager.instance.GenerateSteak();
+        }
     }
 }
