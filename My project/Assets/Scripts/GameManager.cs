@@ -18,8 +18,9 @@ public class GameManager : MonoBehaviour
     public Transform collectableParent;
     public float steakMinX = -2f;
     public float steakMaxX = 2.5f;
-    public float steakMinZ = -4f;
-    public float steakMaxZ = 3f;
+    public float steakMinZ = -5f;
+    public float steakMaxZ = 2f;
+    public float steakY = 8f;
 
 
     public TMP_Text timerText;
@@ -103,7 +104,7 @@ public class GameManager : MonoBehaviour
 
     public void GenerateSteak()
     {
-        Vector3 spawnPos = new Vector3(Random.Range(steakMinX, steakMaxX),7f,Random.Range(steakMinZ, steakMaxZ));
+        Vector3 spawnPos = new Vector3(Random.Range(steakMinX, steakMaxX), steakY, Random.Range(steakMinZ, steakMaxZ));
 
         Instantiate(collectablePrefab, spawnPos, Quaternion.identity, collectableParent);
     }
