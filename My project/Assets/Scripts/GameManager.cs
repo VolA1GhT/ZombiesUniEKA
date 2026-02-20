@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour
     public Transform collectableParent;
     public float steakMinX = -2f;
     public float steakMaxX = 2.5f;
-    public float steakMinZ = -7f;
-    public float steakMaxZ = 7f;
+    public float steakMinZ = -4f;
+    public float steakMaxZ = 3f;
 
 
     public TMP_Text timerText;
@@ -82,8 +82,8 @@ public class GameManager : MonoBehaviour
             if (rb != null)
                 rb.AddForce(pushForce);
 
+            sfxSource.pitch = Random.Range(0.6f, 1.0f);
             sfxSource.PlayOneShot(jumpClip);
-            sfxSource.pitch = Random.Range(0.6f, 1.05f);
         }
         timer += Time.deltaTime;
         timerText.text = "Time: " + timer.ToString("F1") +"s";
@@ -110,6 +110,7 @@ public class GameManager : MonoBehaviour
     public void AddScore()
     {
         score++;
+        sfxSource.pitch = 1f;
         sfxSource.PlayOneShot(collectClip);
         scoreText.text = "Score: " + score;
         gameOverScoreText.text = "Score: " + score;
@@ -121,6 +122,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         musicSource.Stop();
+        sfxSource.pitch = 0.7f;
         sfxSource.PlayOneShot(GameOverClip);
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
