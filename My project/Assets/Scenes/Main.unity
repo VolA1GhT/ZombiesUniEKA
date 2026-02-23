@@ -764,7 +764,8 @@ MonoBehaviour:
   musicClip: {fileID: 8300000, guid: ff46aba6a33464f0da2e1884ad137a23, type: 3}
   collectClip: {fileID: 8300000, guid: a84ba9ccb1917644cb1aaaa8a1b6f2cd, type: 3}
   jumpClip: {fileID: 8300000, guid: 821e23e57117543b39e8bc9bd55e1e1f, type: 3}
-  GameOverClip: {fileID: 8300000, guid: 300f42ebbeae8474f963c282f844252e, type: 3}
+  gameOverClip: {fileID: 8300000, guid: 300f42ebbeae8474f963c282f844252e, type: 3}
+  selectClip: {fileID: 8300000, guid: 9446cf8d1f7105e469ad82cca60712de, type: 3}
 --- !u!4 &884705611
 Transform:
   m_ObjectHideFlags: 0

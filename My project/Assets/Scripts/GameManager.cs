@@ -34,9 +34,10 @@ public class GameManager : MonoBehaviour
     public AudioClip musicClip;
     public AudioClip collectClip;
     public AudioClip jumpClip;
-    public AudioClip GameOverClip;  
+    public AudioClip gameOverClip;
+    public AudioClip selectClip;
 
-    private void Awake()
+    void Awake()
     {
         GameManager.instance = this;
     }
@@ -67,6 +68,9 @@ public class GameManager : MonoBehaviour
             if (selectedIndex > 3)
                 selectedIndex = 0;
             SelectZombie(selectedIndex);
+
+            sfxSource.pitch = 1f;
+            sfxSource.PlayOneShot(selectClip);
         }
         if (prev.WasPressedThisFrame())
         {
@@ -75,6 +79,9 @@ public class GameManager : MonoBehaviour
             if (selectedIndex < 0)
                 selectedIndex = 3;
             SelectZombie(selectedIndex);
+
+            sfxSource.pitch = 1f;
+            sfxSource.PlayOneShot(selectClip);
         }
         if (jump.WasPressedThisFrame())
         {
@@ -124,7 +131,7 @@ public class GameManager : MonoBehaviour
     {
         musicSource.Stop();
         sfxSource.pitch = 0.7f;
-        sfxSource.PlayOneShot(GameOverClip);
+        sfxSource.PlayOneShot(gameOverClip);
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
         scoreText.gameObject.SetActive(false);
